@@ -1,0 +1,27 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <h1>Saham/Price:</h1>
+    <div id="saham"></div>
+    <div id="price"></div>
+    <script type="text/javascript">
+        let saham = document.getElementById("saham");
+        let price = document.getElementById("price");
+
+        let exampleSocket = new WebSocket("ws://localhost:8080/ws")
+
+        let update = function () {
+            exampleSocket.onmessage = function (event) {
+                let display = event.data.split(" ");
+                saham.textContent = display[0].toString();
+                price.textContent = display[1].toString();
+            }
+        };
+        window.setTimeout(update);
+    </script>
+</body>
+
+</html>
